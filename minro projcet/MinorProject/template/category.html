@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block title %} Destination {% endblock %}
+ {% block content %}
+
+ <div class="nine" style="margin: 10px;">
+    <h1><center>Destinations</center><span>Related to {{cat.title}}</span></h1>
+  </div>
+
+ <div class="nepal">
+    {%for p in posts%}
+    <div class="cards">
+      <div class="card">
+        <div class="card__image">
+          <img src="/media/{{p.image}}" alt="" />
+        </div>
+        <div class="card__content">
+          <p class="card__title">{{p.title}}</p>
+          <button>
+            <svg
+              viewBox="0 0 24 24"
+              width="15"
+              height="15"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="css-i6dzq1"
+            >
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <a href="/Apple/Blog/{{p.url}}" style="color: aliceblue" style="text-size-adjust: 10px;">Explore me </a>
+          </button>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+
+{%endblock%}

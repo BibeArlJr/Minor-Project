@@ -1,0 +1,119 @@
+{% extends 'base.html' %} {% block title %} Search {% endblock %}
+ {% block content %}
+
+
+  <div class="four">
+  <h1><span>Search</span> Select <em>Results</em></h1>
+  </div>
+
+  {%if posts|length < 1 and cats|length < 1 %}
+      <center>  <p> No search result found for query - <b>{{query}}</b></p> </center>
+  {%endif%}
+  <!-- Set up your HTML -->
+  <div class="owl-carousel">
+    {%for cat in cats%}
+
+    <div
+      class="card"
+      style="
+        margin: 15px !important;
+        height: 390px !important;
+        width: 380px !important;
+        gap: 5px !important;
+      "
+    >
+      <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="/media/{{cat.image}}" style="width: 400px !important; height: 270px !important" />
+      </div>
+      <div class="card-content" style="height: 30px; padding-top:15px!important;">
+        <span class="card-title activator grey-text text-darken-4"
+          ><b>{{cat.title}}</b><i class="material-icons right">more_vert</i></span
+        >
+        <a href="/Apple/category/{{cat.url}}" class="btn-12" style="text-size-adjust: 10px; color: #000000!important;">See More</a>
+
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4"
+          >{{cat.title}}<i class="material-icons right">close</i></span
+        >
+        <p>{{ cat.content | truncatewords:10 | safe }}</p>
+      </div>
+    </div>
+
+    {%endfor%}
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div class="nine">
+  <h1><center>Top Destinations</center><span>with in Kathmandu VALLEY</span></h1>
+</div>
+
+
+<div class="nepal">
+  {%for p in posts%}
+  <div class="cards">
+    <div class="card">
+      <div class="card__image">
+        <img src="/media/{{p.image}}" alt="" />
+      </div>
+      <div class="card__content">
+        <p class="card__title">{{p.title}}</p>
+        <button>
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="css-i6dzq1"
+          >
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <a href="/Apple/Blog/{{p.url}}" style="color: aliceblue" style="text-size-adjust: 10px;">Explore me </a>
+        </button>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+  <br>
+  <br>
+  <div class="container" style="margin-left: 400px;justify-content: center;">
+    <!-- pagination elements -->
+    <div class="pagination_section" style="margin-top: 25px!important;">
+        {% if posts.has_previous %}
+        <a href="/?page={{posts.previous_page_number}}" class="{% if page_number == posts.previous_page_number %}active{% endif %}">
+            << Previous
+        </a>
+        <a href="/?page=1" class="{% if page_number == 1 %}active{% endif %}">
+            First
+        </a>
+        {% endif %}
+
+        {% for n in totalPagelist %}
+        <a href="/?page={{n}}" title="Algorithm" class="{% if page_number == n %}active{% endif %}">
+            {{n}}
+        </a>
+        {% endfor %}
+
+        {% if posts.has_next %}
+        <a href="/?page={{lastpage}}" class="{% if page_number == lastpage %}active{% endif %}">
+            Last
+        </a>
+        <a href="/?page={{posts.next_page_number}}" class="{% if page_number == posts.next_page_number %}active{% endif %}">
+            Next >>
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+</div>
+</div>
+
+{% endblock %}
